@@ -59,16 +59,19 @@ function PublicProfilePage() {
         <img className="profile-picture"
           src={profile.profile_picture || DefaultProfilePicture}>  
         </img>
-        <h4>Username: {profile.user.username}</h4>
-        <h4>Follower Count: {profile.followers_count}</h4>
-        <h4>Following Count: {profile.following_count}</h4>
-        <h4>Dietary Preferences: {profile.dietary_requirements.join(", ")}</h4>
-        <h4>Cuisine Preferences: {profile.dietary_preferences.join(", ")}</h4>
 
-        <button onClick={handleFollowToggle}>
-          {profile.is_following ? "Unfollow" : "Follow"}
-        </button>
+        <div className="profile-info">
+          <h4>Username: {profile.user.username}</h4>
+          <h4>Follower Count: {profile.followers_count}</h4>
+          <h4>Following Count: {profile.following_count}</h4>
+          <h4>Dietary Preferences: {profile.dietary_requirements.join(", ")}</h4>
+          <h4>Cuisine Preferences: {profile.dietary_preferences.join(", ")}</h4>
+
+          <button onClick={handleFollowToggle}>
+            {profile.is_following ? "Unfollow" : "Follow"}
+          </button>
         </div>
+      </div>
     </div>
   );
 }
