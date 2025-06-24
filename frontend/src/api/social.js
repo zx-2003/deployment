@@ -9,7 +9,7 @@ import { ACCESS_TOKEN } from "../constants";
 const fallbackApiUrl = "/choreo-apis/awbo/backend/rest-api-be2/v1.0";
 
 // const apiUrl = import.meta.env.VITE_API_URL || fallbackApiUrl;
-const apiUrl = "https://nomnom-deployment-97793039179.asia-southeast1.run.app" || fallbackApiUrl;
+const apiUrl = "https://nomnom-deployment-kmbjgbfjwa-as.a.run.app" || fallbackApiUrl;
 
 const social = axios.create({
   baseURL: apiUrl,
