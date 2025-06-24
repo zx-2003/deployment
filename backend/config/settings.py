@@ -14,11 +14,20 @@ from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
 import os
+from google.oauth2 import service_account
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
 
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_BUCKET_NAME = os.getenv("GS_BUCKET_NAME")
+
+GS_CREDENTIALS = service_account.Credentials.from_service_account_file(
+    os.path.join(BASE_DIR, 'gcs-key.json')
+)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
@@ -60,6 +69,7 @@ INSTALLED_APPS = [
     "accounts",
     "social",
     "promotions",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -98,16 +108,28 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.mysql',
+    #    'NAME': 'testingver13',
+    #    'USER': 'root',
+    #    'PASSWORD': 'wearenumberone',
+    #    'HOST': '127.0.0.1', 
+    #    'HOST': 'localhost', 
+    #    'PORT': '3306',
+    #    'OPTIONS' : {
+    #        'charset' : 'utf8mb4', #emojis and special chars
+    #    }
+    #}
+
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'testingver13',
-        'USER': 'root',
-        'PASSWORD': 'wearenumberone',
-        'HOST': '127.0.0.1', 
-        'HOST': 'localhost', 
-        'PORT': '3306',
-        'OPTIONS' : {
-            'charset' : 'utf8mb4', #emojis and special chars
+        'NAME': os.getenv('DB_NAME', 'testingver13'),
+        'USER': os.getenv('DB_USER', 'root'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'wearenumberone'),
+        'HOST': os.getenv('DB_HOST', 'db'),
+        'PORT': os.getenv('DB_PORT', '3306'),
+        'OPTIONS': {
+            'charset': 'utf8mb4',
         }
     }
 }
@@ -156,5 +178,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = BASE_DIR / 'media'
