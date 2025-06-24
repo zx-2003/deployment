@@ -47,3 +47,7 @@ Desktop.ini
 node_modules/
 npm-debug.log
 yarn-error.log
+
+# gcs key
+gcs-key.json
+backend/gcs-key.json
