@@ -16,8 +16,6 @@ WORKDIR /app
 
 COPY requirements.txt .
 
-COPY gcs-key.json /app/gcs-key.json
-
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY . .
